@@ -1,10 +1,10 @@
-Feature: Manage Questionnaires
-	In order to Make a Questionnaire
+Feature: Manage Surveys
+	In order to Make a Survey
 	As an Author
-	I want to create and manage Questionnaires
+	I want to create and manage Surveys
 
-	Scenario: Questionnaires List
-		Given I have Questionnaires titled Food, Movies
-		When I go to the list of Questionnaires
+	Scenario: Surveys List
+		Given I have Surveys titled Food, Movies
+		When I go to the list of Surveys
 		Then I should see "Food" 
 		And I should see "Movies"
