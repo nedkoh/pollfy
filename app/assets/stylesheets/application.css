@@ -11,3 +11,24 @@
  *= require_self
  *= require_tree .
  */
+
+.signup_form {
+	margin:20px;
+	padding:30px;
+	border:2px solid; 
+	-moz-border-radius: 0px;
+    -webkit-border-radius: 20px;
+	border-radius:20px; 
+	box-shadow: 10px 10px 5px #888888; 
+	float:left; 
+	border-color:black; 
+	background-color:#CDD48E;
+}
+
+.links {
+	float:left; clear:both;
+}
+
+.alert {
+	color: red;
+}

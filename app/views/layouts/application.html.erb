@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Pollfy</title>
+  <title>Pollfy - <%= yield(:title).empty? ? 'Survey like a boss' :yield(:title) %></title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
@@ -19,6 +19,7 @@ Signed in as <%= current_user.email %>. Not you? <%= link_to "Sign out", destroy
 <%= javascript_tag "$('#flash_notice').effect('highlight',{},1000);" %>
 <p class="alert"><%= flash[:alert] %></p>
 
+<h1><%= yield(:title) %></h1>
 <%= yield %>
 </body>
 </html>
