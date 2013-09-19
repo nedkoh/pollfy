@@ -20,7 +20,7 @@
         <td><%= survey.updated_at %></td>
         <td><%= link_to 'View', survey %></td>
         <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
-        <td><%= link_to 'Delete', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><% if can? :delete, @survey %><%= link_to 'Delete', survey, method: :delete, data: { confirm: 'Are you sure?' } %><% end %></td>
       </tr>
     <% end %>
   </tbody>
