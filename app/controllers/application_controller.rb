@@ -4,4 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   #user authentication for everything
   before_filter :authenticate_user!
+  #check authorization for resources with cancan except devise
+  check_authorization :unless => :devise_controller?
+
+  #if no access redirect home and show nice message
+  rescue_from CanCan::AccessDenied do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 end
