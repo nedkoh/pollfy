@@ -8,7 +8,7 @@ class Ability
     elsif user.has_role? :subscriber
         can :read, :all
     elsif user.has_role? :member
-        can :read, :all
+        can :read, :all, :user_id => user.id
     end
 
     # Define abilities for the passed in user here. For example:

@@ -4,7 +4,11 @@ class SurveysController < ApplicationController
   # GET /surveys
   # GET /surveys.json
   def index
+    if current_user.has_role? :admin
     @surveys = Survey.all
+    else
+      @surveys = Survey.find_all_by_user_id current_user[:id]
+    end
   end
 
   # GET /surveys/1
@@ -25,6 +29,7 @@ class SurveysController < ApplicationController
   # POST /surveys.json
   def create
     @survey = Survey.new(survey_params)
+    @survey.user_id = current_user.id
 
     respond_to do |format|
       if @survey.save
