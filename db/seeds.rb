@@ -16,6 +16,6 @@ role = Role.find(1)
 User.create!(:id => 1, :email => "admin@gmail.com", :password => "nji9NJI(", :encrypted_password => "$2a$10$PtXUTYlBN.DRINuWHlda8.w7CXpPTEuPaNELPVAkf62nCu3HOr5V.", :roles => [role])
 User.create!(:id => 2, :email => "member@gmail.com", :password => "nji9NJI(", :encrypted_password => "$2a$10$PtXUTYlBN.DRINuWHlda8.w7CXpPTEuPaNELPVAkf62nCu3HOr5V.")
 paidm = Role.find(3)
-User.create!(:id => 2, :email => "koko@gmail.com", :password => "nji9NJI(", :encrypted_password => "$2a$10$PtXUTYlBN.DRINuWHlda8.w7CXpPTEuPaNELPVAkf62nCu3HOr5V.", :roles => [paidm])
+User.create!(:id => 3, :email => "koko@gmail.com", :password => "nji9NJI(", :encrypted_password => "$2a$10$PtXUTYlBN.DRINuWHlda8.w7CXpPTEuPaNELPVAkf62nCu3HOr5V.", :roles => [paidm])
 
 puts "Ready to rock!"
