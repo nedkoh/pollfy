@@ -7,6 +7,12 @@ class ApplicationController < ActionController::Base
   #check authorization for resources with cancan except devise
   check_authorization :unless => :devise_controller?
 
+before_filter do
+  resource = controller_name.singularize.to_sym
+  method = "#{resource}_params"
+  params[resource] &&= send(method) if respond_to?(method, true)
+end
+
   #if no access redirect home and show nice message
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
