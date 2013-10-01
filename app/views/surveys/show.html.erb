@@ -1,3 +1,5 @@
+<% title "View survey" %>
+
 <p id="notice"><%= notice %></p>
 
 <p>
@@ -16,46 +18,8 @@
 </p>
 
 <h2>Questions</h2>
-<% @survey.questions.each do |question| %>
-  <p>
-    <strong><%= question.order %>. Type:</strong>
-    <%= collection_select(:question, :qtype, QuestionType.all, :questiontype, :questiontype, :selected => question.qtype) %>
-  </p>
- 
-  <p>
-    <strong>Title:</strong>
-    <%= question.title %></br>
-    <%= question.desc %>
-  </p>
-  <p>
-<% if question.qtype == 'multiple' %>
-<% question.definition.each do |t| %>
-<%= check_box_tag(:multiple) %>
-<%= label_tag(:multiple, t) %></br>
-<% end %>
-<% end %>
-<% if question.qtype == 'radio' %>
-<% question.definition.each do |t| %>
-<%= radio_button_tag(:radio, 'bla') %>
-<%= label_tag(:radio, t) %></br>
-<% end %>
-<% end %>
-<% if question.qtype == 'dropdown' %>
-<% dropdown_array = question.definition.map { |v| [v, v] } %>
-<%= select_tag(:answer, options_for_select(dropdown_array)) %>
-<% end %>
-<% if question.qtype == 'comment' %>
-<%= text_area_tag :answer %>
-<% end %>
-<% if question.qtype == 'rating' %>
-<%= custom_table_for(question.definition) do |t| %><%= t %>
-<% end %>
-<% end %>
-<% if question.qtype == 'textbox' %>
-<%= text_field_tag :answer %>
-<% end %>
-</p>
- <% end %>
+<%= render @survey.questions %>
 
+<p/>
 <%= link_to 'Edit', edit_survey_path(@survey) %> | <%= link_to 'View Questions', survey_questions_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>
