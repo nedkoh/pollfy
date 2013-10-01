@@ -17,5 +17,10 @@ User.create!(:id => 1, :email => "admin@gmail.com", :password => "nji9NJI(", :en
 User.create!(:id => 2, :email => "member@gmail.com", :password => "nji9NJI(", :encrypted_password => "$2a$10$PtXUTYlBN.DRINuWHlda8.w7CXpPTEuPaNELPVAkf62nCu3HOr5V.")
 paidm = Role.find(3)
 User.create!(:id => 3, :email => "koko@gmail.com", :password => "nji9NJI(", :encrypted_password => "$2a$10$PtXUTYlBN.DRINuWHlda8.w7CXpPTEuPaNELPVAkf62nCu3HOr5V.", :roles => [paidm])
-
+#Create some question types
+QuestionType.create!(:id => 1, :questiontype => "comment")
+QuestionType.create!(:id => 2, :questiontype => "multiple")
+QuestionType.create!(:id => 3, :questiontype => "radio")
+QuestionType.create!(:id => 4, :questiontype => "dropdown")
+QuestionType.create!(:id => 5, :questiontype => "date")
 puts "Ready to rock!"

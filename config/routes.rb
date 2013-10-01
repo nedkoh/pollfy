@@ -1,7 +1,12 @@
 Pollfy::Application.routes.draw do
-  devise_for :users
-  resources :surveys
+  resources :questions
 
+  devise_for :users
+  resources :surveys do 
+    resources :questions
+  end
+
+  get 'profile', to: 'users#edit'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

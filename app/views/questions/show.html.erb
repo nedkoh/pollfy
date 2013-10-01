@@ -1,0 +1,69 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @question.title %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @question.qtype %>
+</p>
+
+<p>
+  <strong>Desc:</strong>
+  <%= @question.desc %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @question.answer %>
+</p>
+
+<p>
+  <strong>Definition:</strong>
+  <%= @question.definition %>
+</p>
+
+<p>
+  <strong>Require:</strong>
+  <%= @question.require %>
+</p>
+
+<p>
+  <strong>Validate:</strong>
+  <%= @question.validate %>
+</p>
+
+<p>
+  <strong>Page:</strong>
+  <%= @question.page %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @question.order %>
+</p>
+
+<p>
+  <strong>Created at:</strong>
+  <%= @question.created_at %>
+</p>
+
+<p>
+  <strong>Updated at:</strong>
+  <%= @question.updated_at %>
+</p>
+
+<p>
+  <strong>Survey:</strong>
+  <%= @question.survey_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @question.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_question_path(@question) %> | 
+<%= link_to 'Back', questions_path %>
