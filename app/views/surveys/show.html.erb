@@ -40,6 +40,13 @@
 <%= label_tag(:radio, t) %></br>
 <% end %>
 <% end %>
+<% if question.qtype == 'dropdown' %>
+<% dropdown_array = question.definition.map { |v| [v, v] } %>
+<%= select_tag(:answer, options_for_select(dropdown_array)) %>
+<% end %>
+<% if question.qtype == 'comment' %>
+<%= text_area_tag :answer %>
+<% end %>
 </p>
  <% end %>
 
