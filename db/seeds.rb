@@ -23,4 +23,6 @@ QuestionType.create!(:id => 2, :questiontype => "multiple")
 QuestionType.create!(:id => 3, :questiontype => "radio")
 QuestionType.create!(:id => 4, :questiontype => "dropdown")
 QuestionType.create!(:id => 5, :questiontype => "date")
+QuestionType.create!(:id => 6, :questiontype => "rating")
+QuestionType.create!(:id => 7, :questiontype => "textbox")
 puts "Ready to rock!"

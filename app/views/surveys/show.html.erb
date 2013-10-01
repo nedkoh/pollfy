@@ -47,6 +47,13 @@
 <% if question.qtype == 'comment' %>
 <%= text_area_tag :answer %>
 <% end %>
+<% if question.qtype == 'rating' %>
+<%= custom_table_for(question.definition) do |t| %><%= t %>
+<% end %>
+<% end %>
+<% if question.qtype == 'textbox' %>
+<%= text_field_tag :answer %>
+<% end %>
 </p>
  <% end %>
 
