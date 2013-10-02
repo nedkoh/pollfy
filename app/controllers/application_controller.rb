@@ -17,4 +17,9 @@ end
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
+
+  #handle when trying to retrieve something not existing (e.g. surveys/5555555/questions )
+  rescue_from ActiveRecord::RecordNotFound do |exception|
+    redirect_to root_url, :alert => exception.message
+  end
 end

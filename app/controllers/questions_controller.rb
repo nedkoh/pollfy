@@ -7,9 +7,7 @@ class QuestionsController < ApplicationController
   def index
     if current_user.has_role? :admin
       @questions = Question.all
-      if (params[:survey_id]) 
-        @survey = Survey.find(params[:survey_id])
-      end
+      @survey = Survey.find(params[:survey_id])
     else
       @questions = Question.find_all_by_user_id current_user[:id]
       @survey = Survey.find(params[:survey_id])
@@ -24,6 +22,8 @@ class QuestionsController < ApplicationController
   # GET /questions/new
   def new
     @question = Question.new
+    @survey = Survey.find(params[:survey_id])
+    @question.survey_id = params[:survey_id]
   end
 
   # GET /questions/1/edit
@@ -35,10 +35,13 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.user_id = current_user.id
+    @survey = Survey.find(params[:survey_id])
+    #@question.survey_id = @survey.id
+    @question.survey_id = params[:survey_id]
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to @question, notice: 'Question was successfully created.' }
+        format.html { redirect_to survey_question_path(@survey.id), notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
       else
         format.html { render action: 'new' }
@@ -52,7 +55,7 @@ class QuestionsController < ApplicationController
   def update
     respond_to do |format|
       if @question.update(question_params)
-        format.html { redirect_to @question, notice: 'Question was successfully updated.' }
+        format.html { redirect_to survey_question_path(@question.survey_id, @question.id), notice: 'Question was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -66,7 +69,7 @@ class QuestionsController < ApplicationController
   def destroy
     @question.destroy
     respond_to do |format|
-      format.html { redirect_to questions_url }
+      format.html { redirect_to survey_questions_path(params[:survey_id]) }
       format.json { head :no_content }
     end
   end
