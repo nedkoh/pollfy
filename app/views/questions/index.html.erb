@@ -15,8 +15,6 @@
       <th><%= model_class.human_attribute_name(:validate) %></th>
       <th><%= model_class.human_attribute_name(:page) %></th>
       <th><%= model_class.human_attribute_name(:order) %></th>
-      <th><%= model_class.human_attribute_name(:survey_id) %></th>
-      <th><%= model_class.human_attribute_name(:user_id) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -34,8 +32,6 @@
         <td><%= check_box_tag(:question, :require, question.validate, :disabled => true) %></td>
         <td><%= question.page %></td>
         <td><%= question.order %></td>
-        <td><%= question.survey_id %></td>
-        <td><%= question.user_id %></td>
         <td><%=l question.created_at %></td>
         <td>
           <%= link_to 'Edit', edit_survey_question_path(@survey, question), :class => 'btn btn-mini' %>

@@ -1,18 +1,18 @@
 class QuestionsController < ApplicationController
   before_action :set_question, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  load_and_authorize_resource :survey
+  load_and_authorize_resource :question, :through => :survey
 
   # GET /questions
   # GET /questions.json
   def index
     if current_user.has_role? :admin
-      #@questions = Question.all
       @survey = Survey.find(params[:survey_id])
-      #@questions = Question.find_all_by_user_id @survey.user_id
       @questions = @survey.questions
     else
-      @questions = Question.find_all_by_user_id current_user[:id]
       @survey = Survey.find(params[:survey_id])
+      #@questions = Question.find_all_by_user_id current_user[:id]
+      @questions = @survey.questions
     end
   end
 
