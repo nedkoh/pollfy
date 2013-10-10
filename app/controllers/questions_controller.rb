@@ -6,8 +6,10 @@ class QuestionsController < ApplicationController
   # GET /questions.json
   def index
     if current_user.has_role? :admin
-      @questions = Question.all
+      #@questions = Question.all
       @survey = Survey.find(params[:survey_id])
+      #@questions = Question.find_all_by_user_id @survey.user_id
+      @questions = @survey.questions
     else
       @questions = Question.find_all_by_user_id current_user[:id]
       @survey = Survey.find(params[:survey_id])
@@ -25,8 +27,8 @@ class QuestionsController < ApplicationController
     @survey = Survey.find(params[:survey_id])
     @question.survey_id = params[:survey_id]
     @question.user_id = current_user.id
-    @question.order = @survey.questions.maximum('order') + 1
-    @question.page = @survey.questions.maximum('page')
+    @question.order = (@survey.questions.maximum('order') == nil)? 1 : @survey.questions.maximum('order') + 1
+    @question.page = (@survey.questions.maximum('page') == nil)? 1 : @survey.questions.maximum('page')
   end
 
   # GET /questions/1/edit
