@@ -24,6 +24,9 @@ class QuestionsController < ApplicationController
     @question = Question.new
     @survey = Survey.find(params[:survey_id])
     @question.survey_id = params[:survey_id]
+    @question.user_id = current_user.id
+    @question.order = @survey.questions.maximum('order') + 1
+    @question.page = @survey.questions.maximum('page')
   end
 
   # GET /questions/1/edit
@@ -38,6 +41,7 @@ class QuestionsController < ApplicationController
     @survey = Survey.find(params[:survey_id])
     @question.survey_id = @survey.id
     @question.survey_id = params[:survey_id]
+    #@question.order = @survey.questions.maximum('order')
 
     respond_to do |format|
       if @question.save
