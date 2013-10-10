@@ -19,7 +19,7 @@
       <tr>
         <td><%= link_to survey.id, survey_path(survey) %></td>
         <td><%= link_to survey.title, survey_path(survey)%></td>
-        <td><%= survey.user_id %></td>
+        <td><%= survey.user.email %></td>
         <td><%=l survey.created_at  %></td>
         <td><%=l survey.updated_at %></td>
         <td>
