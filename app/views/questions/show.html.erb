@@ -1,69 +1,35 @@
-<p id="notice"><%= notice %></p>
+<%- model_class = Question -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+</div>
 
-<p>
-  <strong>Title:</strong>
-  <%= @question.title %>
-</p>
+<dl class="dl-horizontal">
+  <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
+  <dd><%= @question.title %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:qtype) %>:</strong></dt>
+  <dd><%= @question.qtype %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:desc) %>:</strong></dt>
+  <dd><%= @question.desc %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:answer) %>:</strong></dt>
+  <dd><%= @question.answer %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:definition) %>:</strong></dt>
+  <dd><%= @question.definition %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:require) %>:</strong></dt>
+  <dd><%= check_box_tag(@question.require, :disabled => true) %></dd>      
+  <dt><strong><%= model_class.human_attribute_name(:validate) %>:</strong></dt>
+  <dd><%= check_box_tag(@question.validate, :disabled => true) %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:page) %>:</strong></dt>
+  <dd><%= @question.page %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:order) %>:</strong></dt>
+  <dd><%= @question.order %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:survey_id) %>:</strong></dt>
+  <dd><%= @question.survey_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
+  <dd><%= @question.user_id %></dd>
+</dl>
 
-<p>
-  <strong>Type:</strong>
-  <%= @question.qtype %>
-</p>
-
-<p>
-  <strong>Desc:</strong>
-  <%= @question.desc %>
-</p>
-
-<p>
-  <strong>Answer:</strong>
-  <%= @question.answer %>
-</p>
-
-<p>
-  <strong>Definition:</strong>
-  <%= @question.definition %>
-</p>
-
-<p>
-  <strong>Require:</strong>
-  <%= @question.require %>
-</p>
-
-<p>
-  <strong>Validate:</strong>
-  <%= @question.validate %>
-</p>
-
-<p>
-  <strong>Page:</strong>
-  <%= @question.page %>
-</p>
-
-<p>
-  <strong>Order:</strong>
-  <%= @question.order %>
-</p>
-
-<p>
-  <strong>Created at:</strong>
-  <%= @question.created_at %>
-</p>
-
-<p>
-  <strong>Updated at:</strong>
-  <%= @question.updated_at %>
-</p>
-
-<p>
-  <strong>Survey:</strong>
-  <%= @question.survey_id %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @question.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_survey_question_path(params[:survey_id], @question) %> | 
-<%= link_to 'Back', survey_questions_path(params[:survey_id]) %> 
+<div class="form-actions">
+  <%= link_to 'Back', survey_questions_path(params[:survey_id]), :class => 'btn' %> 
+  <%= link_to 'Edit', edit_survey_question_path(params[:survey_id], @question), :class => 'btn' %> 
+  <%= link_to 'Delete',  survey_question_path(params[:survey_id], @question), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-danger' %>
+</div>

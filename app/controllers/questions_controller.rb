@@ -36,12 +36,12 @@ class QuestionsController < ApplicationController
     @question = Question.new(question_params)
     @question.user_id = current_user.id
     @survey = Survey.find(params[:survey_id])
-    #@question.survey_id = @survey.id
+    @question.survey_id = @survey.id
     @question.survey_id = params[:survey_id]
 
     respond_to do |format|
       if @question.save
-        format.html { redirect_to survey_question_path(@survey.id), notice: 'Question was successfully created.' }
+        format.html { redirect_to survey_question_path(@survey.id, @question.id), notice: 'Question was successfully created.' }
         format.json { render action: 'show', status: :created, location: @question }
       else
         format.html { render action: 'new' }

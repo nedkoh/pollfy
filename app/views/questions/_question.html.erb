@@ -9,10 +9,11 @@
     <%= question.desc %>
   </p>
   <p>
+<div class="control-group">
 <% if question.qtype == 'multiple' %>
 <% question.definition.each do |t| %>
-<%= check_box_tag(:multiple) %>
-<%= label_tag(:multiple, t) %></br>
+<div class="controls"><%= check_box_tag(:multiple) %></div>
+<%= label_tag(:multiple, t, :class => 'control-label') %>
 <% end %>
 <% end %>
 <% if question.qtype == 'radio' %>
@@ -35,3 +36,4 @@
 <% if question.qtype == 'textbox' %>
 <%= text_field_tag :answer %>
 <% end %>
+</div>

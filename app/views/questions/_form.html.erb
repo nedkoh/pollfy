@@ -1,59 +1,74 @@
-<%= form_for [@survey, @question] do |f| %>
-  <% if @question.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
-
-      <ul>
-      <% @question.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+<%= form_for [@survey, @question] , :html => { :class => 'form-horizontal' } do |f| %>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'text_field' %>
     </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :qtype, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.collection_select(:qtype, QuestionType.all, :questiontype, :questiontype) %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :desc, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :desc, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :answer, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :answer, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :definition, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :definition, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :require, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :require, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :validate, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :validate, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :page, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :page, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :order, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :order, :class => 'text_field' %>
+    </div>
+  </div>
+  <% if current_user.has_role? :admin %>
+  <div class="control-group">
+    <%= f.label :survey_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :survey_id, :class => 'text_field' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :user_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :user_id, :class => 'text_field' %>
+    </div>
+  </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_area :title %>
-  </div>
-  <div class="field">
-    <%= f.label :qtype %><br>
-    <%= f.collection_select(:qtype, QuestionType.all, :questiontype, :questiontype) %>
-  </div>
-  <div class="field">
-    <%= f.label :desc %><br>
-    <%= f.text_area :desc %>
-  </div>
-  <div class="field">
-    <%= f.label :answer %><br>
-    <%= f.text_area :answer %>
-  </div>
-  <div class="field">
-    <%= f.label :definition %><br>
-    <%= f.text_field :definition %>
-  </div>
-  <div class="field">
-    <%= f.label :require %><br>
-    <%= f.check_box :require %>
-  </div>
-  <div class="field">
-    <%= f.label :validate %><br>
-    <%= f.check_box :validate %>
-  </div>
-  <div class="field">
-    <%= f.label :page %><br>
-    <%= f.number_field :page %>
-  </div>
-  <div class="field">
-    <%= f.label :order %><br>
-    <%= f.number_field :order %>
-  </div>
-<% if current_user.has_role? :admin %>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-<% end %>
-  <div class="actions">
-    <%= f.submit %>
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', survey_questions_path(params[:survey_id]), :class => 'btn' %> 
   </div>
 <% end %>
