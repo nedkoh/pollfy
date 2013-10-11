@@ -24,6 +24,9 @@ gem 'twitter-bootstrap-rails'
 gem "therubyracer"
 gem "less-rails"
 
+#enable file uploads
+gem 'carrierwave'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
