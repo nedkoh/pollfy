@@ -11,20 +11,20 @@
   <p>
 <div class="control-group">
 <% if question.qtype == 'multiple' %>
-<% question.definition.each do |t| %>
-<div class="controls"><%= check_box_tag(:multiple) %></div>
-<%= label_tag(:multiple, t, :class => 'control-label') %>
+<% question.definition.each_with_index do |t, index| %>
+<div class="controls"><%= check_box_tag("question#{question.id}_[#{index}]") %></div>
+<%= label_tag("question#{question.id}_[#{index}]", t, :class => 'control-label') %>
 <% end %>
 <% end %>
 <% if question.qtype == 'radio' %>
-<% question.definition.each do |t| %>
-<%= radio_button_tag(:radio, 'bla') %>
-<%= label_tag(:radio, t) %></br>
+<% question.definition.each_with_index do |t, index| %>
+<%= radio_button_tag("question_#{question.id}", index) %>
+<%= label_tag("question_#{question.id}", t) %></br>
 <% end %>
 <% end %>
 <% if question.qtype == 'dropdown' %>
-<% dropdown_array = question.definition.map { |v| [v, v] } %>
-<%= select_tag(:answer, options_for_select(dropdown_array)) %>
+<% dropdown_array = question.definition.each_with_index.map { |i, v| [i, v] } %>
+<%= select_tag("question_#{question.id}", options_for_select(dropdown_array)) %>
 <% end %>
 <% if question.qtype == 'comment' %>
 <%= text_area_tag :answer %>

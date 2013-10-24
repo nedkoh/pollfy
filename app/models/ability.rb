@@ -6,8 +6,8 @@ class Ability
     user ||= User.new
     if user.has_role? :admin
         can :manage, :all
-    elsif user.has_role? :subscriber
-        can :read, :all, :user_id => user.id
+    elsif user.has_role? :paidm
+        can :manage, :all, :user_id => user.id
     elsif user.has_role? :member
         #can :manage, :all
         can :manage, :all, :user_id => user.id

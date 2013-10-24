@@ -1,9 +1,15 @@
 Pollfy::Application.routes.draw do
+  resources :answers
+
   resources :questions
 
   devise_for :users
   resources :surveys do 
     resources :questions
+  end
+
+  resources :surveys do 
+    resources :answers
   end
 
   #get 'profile', to: 'users#edit'

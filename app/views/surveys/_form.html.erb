@@ -17,12 +17,14 @@
       <%= f.text_field :title, :class => 'text_field' %>
     </div>
   </div>
+  <% if current_user.has_role? :admin or current_user.has_role?  :paidm  %>
   <div class="control-group">
     <%= f.label :image, :class => 'control-label' %>
     <div class="controls">
       <%= f.file_field :image, :class => 'text_field'  %>
     </div>
   </div>
+  <% end %>
   <% if current_user.has_role? :admin %>
   <div class="control-group">
     <%= f.label :user_id, :class => 'control-label' %>
@@ -31,7 +33,6 @@
     </div>
   </div>
   <% end %>
-
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
