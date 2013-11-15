@@ -1,6 +1,10 @@
 class SurveysController < ApplicationController
-  before_action :set_survey, only: [:show, :edit, :update, :destroy]
-  load_and_authorize_resource
+  layout 'simple', :only => [:r, :thanks]
+  before_action :set_survey, only: [:show, :edit, :update, :destroy, :r]
+  #skip_before_filter :authenticate_user!, only: 'r'
+  skip_before_filter :authenticate_user!, :only => [:r,:update, :thanks]
+  load_and_authorize_resource :except => [:r, :update, :thanks]
+  skip_authorization_check :only => [:r, :update, :thanks]
   
   # GET /surveys
   # GET /surveys.json
@@ -15,6 +19,20 @@ class SurveysController < ApplicationController
   # GET /surveys/1
   # GET /surveys/1.json
   def show
+  end
+
+  #render survey
+  # GET /surveys/1/r 
+  def r
+    @survey = Survey.find(params[:id])
+    #@survey.questions.length.times { @survey.answers.build }
+    @answers = Array.new(@survey.questions.length) { @survey.answers.build }
+  end
+
+  #redirect survey submission
+  # GET /surveys/1/thanks
+  def thanks
+
   end
 
   # GET /surveys/new
@@ -48,7 +66,11 @@ class SurveysController < ApplicationController
   def update
     respond_to do |format|
       if @survey.update(survey_params)
+        if user_signed_in?
         format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
+        else
+          format.html { redirect_to thanks_survey_path, notice: 'Thank you. Survey was successfully submitted.'  }
+        end
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -75,6 +97,6 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:title, :created_at, :updated_at, :image)
+      params.require(:survey).permit(:title, :created_at, :updated_at, :image, :answers_attributes => [:id, :answer, :survey_id, :question_id, :user_id ])
     end
 end

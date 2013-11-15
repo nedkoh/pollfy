@@ -1,0 +1,36 @@
+<div class="controls">
+   <p>
+    <strong>Title:</strong>
+    <%= r.title %></br>
+    <%= r.desc %>
+  </p>
+  <p>
+<div class="control-group">
+<% if r.qtype == 'multiple' %>
+<% r.definition.each_with_index do |t, index| %>
+<%= check_box_tag("question#{r.id}_[#{index}]") %><%= label_tag("question#{r.id}_[#{index}]", t, :class => 'control-label-a') %><br/>
+<% end %>
+<% end %>
+<% if r.qtype == 'radio' %>
+<% r.definition.each_with_index do |t, index| %>
+<%= radio_button_tag("question_#{r.id}", index) %>
+<%= label_tag("question_#{r.id}", t) %></br>
+<% end %>
+<% end %>
+<% if r.qtype == 'dropdown' %>
+<% dropdown_array = r.definition.each_with_index.map { |i, v| [i, v] } %>
+<%= select_tag("question_#{r.id}", options_for_select(dropdown_array)) %>
+<% end %>
+<% if r.qtype == 'comment' %>
+<%= text_area_tag :answer %>
+<% end %>
+<% if r.qtype == 'rating' %>
+<%= custom_table_for(r.definition) do |t| %><%= t %>
+<% end %>
+<% end %>
+<% if r.qtype == 'textbox' %>
+<%= text_field_tag :answer %>
+<% end %>
+</div>
+</div>
+

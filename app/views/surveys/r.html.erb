@@ -1,0 +1,46 @@
+<% title "View survey" %>
+<%- model_class = Survey -%>
+<div class="page-header">
+  <h1><%= @survey.title %></h1>
+</div>
+
+
+<dl class="dl-horizontal">
+ <%= image_tag @survey.image_url.to_s %>
+ <%= form_for @survey do |s| %>
+   <div class="control-group">
+    <%#= s.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%#= s.text_field :title, :class => 'text_field' %>
+    </div>
+  </div>
+<%# @survey.questions.each.with_index do |question,index| %>
+      <%#= @questions.length %>
+      <%= @survey.title %>
+      <%#= @answers.length %>
+      <%= s.fields_for :answers, @answers do |a| %>
+        <% @q = @survey.questions[a.index] %>
+        <p>
+          <strong><%= @q.order %>.</strong>
+            <%= @q.title %></br>
+            <%= @q.desc %>
+        </p>
+
+        <% if @q.qtype == 'comment' %>
+          <%= a.text_area :answer %>
+        <% end %>
+        <% if @q.qtype == 'textbox' %>
+          <%= a.text_field :answer %>
+        <% end %>
+        <%= a.hidden_field :survey_id %>
+        <%= a.hidden_field :question_id, :value => @q.id %>
+        <%= a.hidden_field :user_id, :value => @survey.user_id %>
+        <br/>
+      <%# end %>
+<% end %>
+    <div class="form-actions">
+    <%= s.submit 'Submit', :class => 'btn btn-primary' %>
+    </div>
+ <% end %>
+
+</dl>

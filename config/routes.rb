@@ -12,6 +12,18 @@ Pollfy::Application.routes.draw do
     resources :answers
   end
 
+  resources :surveys do
+  member do
+    get 'r'
+    get 'thanks'
+  end
+
+  #resources :surveys do
+  #member do
+  #  get 'thanks'
+  #end
+end
+
   #get 'profile', to: 'users#edit'
   #get 'profile', to: 'devise/registrations#edit'
 
