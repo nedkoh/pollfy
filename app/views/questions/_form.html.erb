@@ -53,20 +53,7 @@
       <%= f.text_field :order, :class => 'text_field' %>
     </div>
   </div>
-  <% if current_user.has_role? :admin %>
-  <div class="control-group">
-    <%= f.label :survey_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :survey_id, :class => 'text_field' %>
-    </div>
-  </div>
-  <div class="control-group">
-    <%= f.label :user_id, :class => 'control-label' %>
-    <div class="controls">
-      <%= f.text_field :user_id, :class => 'text_field' %>
-    </div>
-  </div>
-  <% end %>
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to 'Cancel', survey_questions_path(params[:survey_id]), :class => 'btn' %> 

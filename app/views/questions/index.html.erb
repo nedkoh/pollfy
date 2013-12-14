@@ -34,6 +34,7 @@
         <td><%= question.order %></td>
         <td><%=l question.created_at %></td>
         <td>
+          <%= link_to 'Answers', survey_question_answers_path(@survey, question), :class => 'btn btn-mini' %> 
           <%= link_to 'Edit', edit_survey_question_path(@survey, question), :class => 'btn btn-mini' %>
           <%= link_to 'Destroy',  survey_question_path(@survey, question), method: :delete, data: { confirm: 'Are you sure?' }, :class => 'btn btn-mini btn-danger' %>
         </td>
@@ -41,7 +42,7 @@
     <% end %>
   </tbody>
 </table>
-
-<%= link_to 'New', new_survey_question_path(@survey), :class => 'btn btn-primary' %>
+<%= link_to '< Back', survey_path(@survey), :class => 'btn btn-primary' %> 
+<%= link_to 'Add Question', new_survey_question_path(@survey), :class => 'btn btn-primary' %>
 <%= link_to 'Surveys', surveys_path, :class => 'btn btn-primary' %>
-<%= link_to 'To Survey', survey_path(@survey), :class => 'btn btn-primary' %> 
+

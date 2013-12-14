@@ -1,10 +1,10 @@
 module TableHelper
-  def custom_table_for(items)
+  def custom_table_for(items, order)
     @columns = ['disagree', 'indifferent', 'agree']
     yield #content_tag(:p, "Hello world!")
 
       content_tag :table do
-        thead + tbody(items)
+        thead + tbody(items, order)
     end
     #content_tag :table do
     #  thead + tbody(items)
@@ -24,13 +24,13 @@ module TableHelper
     end
   end
 
-  def tbody(items)
+  def tbody(items, order)
     content_tag :tbody do
       items.each { |e|
        concat(content_tag(:tr){
         concat(content_tag(:td, e))
-        @columns.each do |c|
-          concat(content_tag(:td, radio_button_tag(:radio, 'bla')))
+        @columns.each_with_index do |c, index|
+          concat(content_tag(:td, radio_button_tag("survey[answers_attributes][#{order}][response][]", index )))
         end
         })
       }

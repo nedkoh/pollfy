@@ -25,7 +25,7 @@
 <%= text_area_tag :answer %>
 <% end %>
 <% if r.qtype == 'rating' %>
-<%= custom_table_for(r.definition) do |t| %><%= t %>
+<%= custom_table_for(r.definition, r.order) do |t| %><%= t %>
 <% end %>
 <% end %>
 <% if r.qtype == 'textbox' %>

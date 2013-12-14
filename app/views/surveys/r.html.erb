@@ -1,12 +1,12 @@
 <% title "View survey" %>
 <%- model_class = Survey -%>
+<%= image_tag @survey.image_url.to_s %>
 <div class="page-header">
   <h1><%= @survey.title %></h1>
 </div>
 
 
 <dl class="dl-horizontal">
- <%= image_tag @survey.image_url.to_s %>
  <%= form_for @survey do |s| %>
    <div class="control-group">
     <%#= s.label :title, :class => 'control-label' %>
@@ -15,27 +15,44 @@
     </div>
   </div>
 <%# @survey.questions.each.with_index do |question,index| %>
-      <%#= @questions.length %>
-      <%= @survey.title %>
-      <%#= @answers.length %>
       <%= s.fields_for :answers, @answers do |a| %>
-        <% @q = @survey.questions[a.index] %>
-        <p>
+        <% @q = @survey.questions.order("\"order\"")[a.index] %>
+        <div class="question-header">
           <strong><%= @q.order %>.</strong>
-            <%= @q.title %></br>
+            <%= @q.title %><br/><br/>
             <%= @q.desc %>
-        </p>
-
+        </div>
+        <br/>
+        <div class="question-body">
         <% if @q.qtype == 'comment' %>
           <%= a.text_area :answer %>
         <% end %>
         <% if @q.qtype == 'textbox' %>
           <%= a.text_field :answer %>
         <% end %>
+        <% if @q.qtype == 'radio' %>
+            <% dropdown_array = @q.definition.each_with_index.map { |i, v| [i, v] } %>
+            <%#= a.collection_radio_buttons :answer, options_for_select(dropdown_array) %>
+            <% @q.definition.each_with_index do |t, index| %>
+            <%= a.radio_button :answer, index %>
+            <%= a.label t %></br>
+          <% end %>
+        <% end %>
+        <% if @q.qtype == 'multiple' %>
+          <% @q.definition.each_with_index do |t, index| %>
+            <%#= a.check_box :response, {:multiple => true}, index, nil %>
+            <%= a.check_box :response, {:multiple => true}, index, nil %><%= a.label t %></br><br/>
+          <% end %>
+        <% end %>
+        <% if @q.qtype == 'dropdown' %>
+          <% dropdown_array = @q.definition.each_with_index.map { |i, v| [i, v] } %>
+            <%= a.select :answer, options_for_select(dropdown_array) %>
+          <% end %>
         <%= a.hidden_field :survey_id %>
         <%= a.hidden_field :question_id, :value => @q.id %>
         <%= a.hidden_field :user_id, :value => @survey.user_id %>
-        <br/>
+      </div>
+      <p/><br/>
       <%# end %>
 <% end %>
     <div class="form-actions">

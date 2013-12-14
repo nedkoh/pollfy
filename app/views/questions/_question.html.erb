@@ -30,7 +30,7 @@
 <%= text_area_tag :answer %>
 <% end %>
 <% if question.qtype == 'rating' %>
-<%= custom_table_for(question.definition) do |t| %><%= t %>
+<%= custom_table_for(question.definition, question.order) do |t| %><%= t %>
 <% end %>
 <% end %>
 <% if question.qtype == 'textbox' %>

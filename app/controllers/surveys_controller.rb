@@ -10,7 +10,7 @@ class SurveysController < ApplicationController
   # GET /surveys.json
   def index
     if current_user.has_role? :admin
-    @surveys = Survey.all
+    @surveys = Survey.all.order("user_id, created_at")
     else
       @surveys = Survey.find_all_by_user_id current_user[:id]
     end
@@ -25,7 +25,6 @@ class SurveysController < ApplicationController
   # GET /surveys/1/r 
   def r
     @survey = Survey.find(params[:id])
-    #@survey.questions.length.times { @survey.answers.build }
     @answers = Array.new(@survey.questions.length) { @survey.answers.build }
   end
 
@@ -97,6 +96,6 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:title, :created_at, :updated_at, :image, :answers_attributes => [:id, :answer, :survey_id, :question_id, :user_id ])
+      params.require(:survey).permit(:title, :created_at, :updated_at, :image, :answers_attributes => [:id, :answer, {:response => []}, :survey_id, :question_id, :user_id ])
     end
 end
