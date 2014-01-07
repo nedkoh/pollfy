@@ -12,14 +12,16 @@
 <div class="control-group">
 <% if question.qtype == 'multiple' %>
 <% question.definition.each_with_index do |t, index| %>
-<div class="controls"><%= check_box_tag("question#{question.id}_[#{index}]") %></div>
-<%= label_tag("question#{question.id}_[#{index}]", t, :class => 'control-label') %>
+<label>
+<div class="controls"><%= check_box_tag("question#{question.id}_[#{index}]") %> <%= t %>
+</label>
 <% end %>
 <% end %>
 <% if question.qtype == 'radio' %>
 <% question.definition.each_with_index do |t, index| %>
-<%= radio_button_tag("question_#{question.id}", index) %>
-<%= label_tag("question_#{question.id}", t) %></br>
+<label>
+<%= radio_button_tag("question_#{question.id}", index) %> <%= t %>
+</label></br>
 <% end %>
 <% end %>
 <% if question.qtype == 'dropdown' %>

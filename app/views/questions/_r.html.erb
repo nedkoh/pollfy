@@ -13,8 +13,11 @@
 <% end %>
 <% if r.qtype == 'radio' %>
 <% r.definition.each_with_index do |t, index| %>
-<%= radio_button_tag("question_#{r.id}", index) %>
-<%= label_tag("question_#{r.id}", t) %></br>
+<%#= label_tag("question_#{r.id}", t) %>
+<label>
+<%= radio_button_tag("question_#{r.id}", index) %> <%= t %>
+</label>
+</br>
 <% end %>
 <% end %>
 <% if r.qtype == 'dropdown' %>

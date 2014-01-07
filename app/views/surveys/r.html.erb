@@ -32,16 +32,21 @@
         <% end %>
         <% if @q.qtype == 'radio' %>
             <% dropdown_array = @q.definition.each_with_index.map { |i, v| [i, v] } %>
-            <%#= a.collection_radio_buttons :answer, options_for_select(dropdown_array) %>
+            <%#= a.collection_radio_buttons :answer, options_for_select(dropdown_array) %><%#= a.label t %>
             <% @q.definition.each_with_index do |t, index| %>
-            <%= a.radio_button :answer, index %>
-            <%= a.label t %></br>
+            <label>
+            <%= a.radio_button :answer, index %>  <%= t %>
+            </label>
+            </br>
           <% end %>
         <% end %>
         <% if @q.qtype == 'multiple' %>
           <% @q.definition.each_with_index do |t, index| %>
-            <%#= a.check_box :response, {:multiple => true}, index, nil %>
-            <%= a.check_box :response, {:multiple => true}, index, nil %><%= a.label t %></br><br/>
+            <%#= a.check_box :response, {:multiple => true}, index, nil %><%#= a.label t %>
+            <label>
+            <%= a.check_box :response, {:multiple => true}, index, nil %> <%= t %>
+            </label>
+          </br><br/>
           <% end %>
         <% end %>
         <% if @q.qtype == 'dropdown' %>
