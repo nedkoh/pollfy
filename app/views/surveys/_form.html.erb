@@ -17,6 +17,79 @@
       <%= f.text_field :title, :class => 'text_field' %>
     </div>
   </div>
+
+  <div class="control-group">
+    <%= f.label :collect, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.check_box :collect, :class => 'text_field' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :start_at_date, :class => 'control-label' %>
+    <div class="input-append" id="start_input">
+      <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" value="<%=@survey.start.localtime.to_formatted_s(:datepicker) unless @survey.start.nil? %>"></input>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+        </i>
+      </span>
+    </div>
+  </div>
+  <script type="text/javascript">
+  $(function() {
+    $('#start_input').datetimepicker({
+      language: 'en',
+      pick12HourFormat: true
+    });
+  });
+  </script>
+
+  <%= hidden_field_tag('survey[start]', (@survey.start.localtime.to_formatted_s(:datepicker) unless @survey.start.nil?)) %>
+
+  <div class="control-group">
+    <%= f.label :end_at_date, :class => 'control-label' %>
+    <div class="input-append" id="end_input">
+      <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" value="<%=@survey.end.localtime.to_formatted_s(:datepicker) unless @survey.end.nil? %>"></input>
+      <span class="add-on">
+        <i data-time-icon="icon-time" data-date-icon="icon-calendar">
+        </i>
+      </span>
+    </div>
+  </div>
+  <script type="text/javascript">
+  $(function() {
+    $('#end_input').datetimepicker({
+      language: 'en',
+      pick12HourFormat: true
+    });
+  });
+  </script>
+
+  <%= hidden_field_tag('survey[end]', (@survey.end.localtime.to_formatted_s(:datepicker) unless @survey.end.nil?)) %>
+
+  <script type="text/javascript">
+    $('#start_input').on('changeDate', function(e) { changeDate(e, 'survey_start') });
+    $('#end_input').on('changeDate', function(e) { changeDate(e, 'survey_end') });
+
+    function changeDate(e, hiddenName) {
+    //console.log(e.localDate.toString());
+    d = e.localDate;
+    if (d == null) 
+    {
+      $('#' + hiddenName).val('');
+      return;
+    }
+    rails_date = d.getFullYear() + '-' + ('0' + (d.getMonth() + 1)).slice(-2) + '-' + ('0' + d.getDate()).slice(-2)
+    rails_hour = ('0' + d.getHours()).slice(-2) + ':' + ('0' + d.getMinutes()).slice(-2) + ':' + ('0' + d.getSeconds()).slice(-2)
+    full_date = rails_date + ' ' + rails_hour
+    console.log(full_date);
+    $('#' + hiddenName).val(full_date);
+    console.log($('#' + hiddenName).val());
+    alert($('#' + hiddenName).val());
+  }
+  </script>
+
+
   <% if current_user.has_role? :admin or current_user.has_role?  :paidm  %>
   <div class="control-group">
     <%= f.label :image, :class => 'control-label' %>

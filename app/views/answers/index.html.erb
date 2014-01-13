@@ -20,7 +20,7 @@
         <td><%= answer.answer %></td>
         <td><%= answer.response %></td>
         <td><%= answer.question_id %></td>
-        <td><%=l answer.created_at %></td>
+        <td><%=l answer.created_at, format: :short %></td>
         <td>
           <%= link_to 'details', answer_path(answer), :class => 'btn btn-mini' %>
         </td>

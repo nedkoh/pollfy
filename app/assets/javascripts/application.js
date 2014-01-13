@@ -16,3 +16,6 @@
 //= require turbolinks
 //= require_tree .
 //= require jquery.ui.all
+//
+// Datetime picker
+//= require bootstrap-datetimepicker

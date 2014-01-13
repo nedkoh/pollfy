@@ -12,7 +12,17 @@
  *
  *= require_self
  *= require_tree .
+ *
+ * Datetime picker styles
+ *= require bootstrap-datetimepicker
  */
+
+/* fix the annoyance of empty dd tags shifting lower things up */
+.dl-horizontal > dd:after {
+  display: table;
+  content: "";
+  clear: both;
+}
 
 .signup_form, .signin_form, .forgotpass_form {
 	margin:20px;

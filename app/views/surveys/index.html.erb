@@ -6,7 +6,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <% if current_user.has_role? :admin %>
       <th><%= model_class.human_attribute_name(:user_id) %></th>
@@ -19,13 +18,12 @@
   <tbody>
     <% @surveys.each do |survey| %>
       <tr>
-        <td><%= link_to survey.id, survey_path(survey) %></td>
         <td><%= link_to survey.title, survey_path(survey)%></td>
         <% if current_user.has_role? :admin %>
         <td><%= survey.user.email %></td>
         <% end %>
-        <td><%=l survey.created_at  %></td>
-        <td><%=l survey.updated_at %></td>
+        <td><%=l survey.created_at, format: :short %></td>
+        <td><%=l survey.updated_at, format: :short %></td>
         <td>
           <%= link_to 'Answers', survey_answers_path(survey.id), :class => 'btn btn-mini' %> 
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

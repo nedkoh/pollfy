@@ -15,9 +15,9 @@
   <dt><strong><%= model_class.human_attribute_name(:definition) %>:</strong></dt>
   <dd><%= @question.definition %></dd>
   <dt><strong><%= model_class.human_attribute_name(:require) %>:</strong></dt>
-  <dd><%= check_box_tag(@question.require, :disabled => true) %></dd>      
+  <dd><%= check_box_tag(:question, :require, :require, :disabled => true) %></dd>      
   <dt><strong><%= model_class.human_attribute_name(:validate) %>:</strong></dt>
-  <dd><%= check_box_tag(@question.validate, :disabled => true) %></dd>
+  <dd><%= check_box_tag(:question, :validate, :validate, :disabled => true) %></dd>
   <dt><strong><%= model_class.human_attribute_name(:page) %>:</strong></dt>
   <dd><%= @question.page %></dd>
   <dt><strong><%= model_class.human_attribute_name(:order) %>:</strong></dt>

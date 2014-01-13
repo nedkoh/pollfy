@@ -81,4 +81,7 @@ Pollfy::Application.configure do
 
   #needs to be set to the real url
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+
+  #set the time zone
+  config.time_zone = 'Eastern Time (US & Canada)'
 end

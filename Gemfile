@@ -33,6 +33,9 @@ gem "less-rails"
 #enable file uploads
 gem 'carrierwave'
 
+#enable a datetime picker
+gem 'bootstrap-datetimepicker-rails'
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
