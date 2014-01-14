@@ -68,7 +68,8 @@ class SurveysController < ApplicationController
         if user_signed_in?
         format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
         else
-          format.html { redirect_to thanks_survey_path, notice: 'Thank you. Survey was successfully submitted.'  }
+          redirecturl = (@survey.redirect.nil? || @survey.redirect.empty?) ? thanks_survey_path : @survey.redirect 
+          format.html { redirect_to redirecturl, notice: 'Thank you. Survey was successfully submitted.'  }
         end
         format.json { head :no_content }
       else
@@ -96,6 +97,6 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:title, :created_at, :updated_at, :image, :collect, :start, :end, :user_id, :answers_attributes => [:id, :answer, {:response => []}, :survey_id, :question_id, :user_id ])
+      params.require(:survey).permit(:title, :created_at, :updated_at, :image, :collect, :start, :end, :redirect, :user_id, :answers_attributes => [:id, :answer, {:response => []}, :survey_id, :question_id, :user_id ])
     end
 end

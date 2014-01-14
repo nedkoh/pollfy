@@ -9,7 +9,7 @@
   <dt><strong><%= model_class.human_attribute_name(:user_id) %>:</strong></dt>
   <dd><%= @survey.user.email %></dd>
   <dt><strong><%= model_class.human_attribute_name(:collect) %>:</strong></dt>
-  <dd><%= check_box_tag(:survey, :collect, :collect, :disabled => true) %> </dd>    
+  <dd><%= check_box :survey, :collect, :disabled => true %> </dd>    
   <dt><strong><%= model_class.human_attribute_name(:start) %>:</strong></dt>
   <dd><%= @survey.start %> <%#=l @survey.start, format: :long %></dd>
   <dt><strong><%= model_class.human_attribute_name(:end) %>:</strong></dt>
@@ -18,8 +18,13 @@
   <dd><%= @survey.created_at %></dd>
   <dt><strong><%= model_class.human_attribute_name(:updated_at) %>:</strong></dt>
   <dd><%= @survey.updated_at %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:image_path) %>:</strong></dt>
+  <%# extra features for paid members and admins %>
+  <% if current_user.has_role? :admin or current_user.has_role?  :paidm  %>
+  <dt><strong><%= model_class.human_attribute_name(:redirect) %>:</strong></dt>
+  <dd><%= @survey.redirect %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:image_path) %>:</strong></dt>
   <dd><%= @survey.image %></dd>
+  <% end %>
 </dl>
 
 <div class="form-actions">

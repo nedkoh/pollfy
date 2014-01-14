@@ -88,8 +88,14 @@
   }
   </script>
 
-
+  <%# extra features for paid members and admins %>
   <% if current_user.has_role? :admin or current_user.has_role?  :paidm  %>
+    <div class="control-group">
+    <%= f.label :redirect, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :redirect, :class => 'text_field' %>
+    </div>
+  </div>
   <div class="control-group">
     <%= f.label :image, :class => 'control-label' %>
     <div class="controls">

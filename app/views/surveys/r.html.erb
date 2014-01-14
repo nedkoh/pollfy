@@ -1,5 +1,6 @@
 <% title "View survey" %>
 <%- model_class = Survey -%>
+<% if @survey.collect && (@survey.start == nil || @survey.start < Time.now) && (@survey.end == nil || @survey.end > Time.now) %>
 <%= image_tag @survey.image_url.to_s %>
 <div class="page-header">
   <h1><%= @survey.title %></h1>
@@ -65,3 +66,6 @@
     </div>
  <% end %>
 </dl>
+<% else %>
+ Not allowed
+<% end %>
