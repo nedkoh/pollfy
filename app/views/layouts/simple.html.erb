@@ -64,9 +64,13 @@
       <div class="row-fluid">
         <div class="span3">
         </div><!--/span-->
-        <div class="span9">
+        <div class="span9"> 
           <%= bootstrap_flash %>
-          <%= yield %>
+          <% if @survey.collect && (@survey.start == nil || @survey.start < Time.now) && (@survey.end == nil || @survey.end > Time.now) %>
+            <%= yield %>
+          <% else %>
+            Not allowed
+          <% end %>
         </div>
       </div><!--/row-->
 

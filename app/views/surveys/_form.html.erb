@@ -44,7 +44,7 @@
   });
   </script>
 
-  <%= hidden_field_tag('survey[start]', (@survey.start.localtime.to_formatted_s(:datepicker) unless @survey.start.nil?)) %>
+  <%= hidden_field_tag('survey[start]', (@survey.start.localtime.to_formatted_s(:db) unless @survey.start.nil?)) %>
 
   <div class="control-group">
     <%= f.label :end_at_date, :class => 'control-label' %>
@@ -65,7 +65,7 @@
   });
   </script>
 
-  <%= hidden_field_tag('survey[end]', (@survey.end.localtime.to_formatted_s(:datepicker) unless @survey.end.nil?)) %>
+  <%= hidden_field_tag('survey[end]', (@survey.end.localtime.to_formatted_s(:db) unless @survey.end.nil?)) %>
 
   <script type="text/javascript">
     $('#start_input').on('changeDate', function(e) { changeDate(e, 'survey_start') });
@@ -85,7 +85,6 @@
     console.log(full_date);
     $('#' + hiddenName).val(full_date);
     console.log($('#' + hiddenName).val());
-    alert($('#' + hiddenName).val());
   }
   </script>
 
