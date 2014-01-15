@@ -83,4 +83,8 @@ end
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  #catch-all route for all bad paths not matching any controller
+  get "*path", to: "surveys#index"
+  
 end

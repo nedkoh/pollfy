@@ -24,7 +24,7 @@
       <tr>
         <td><%= link_to question.id, survey_question_path(@survey, question) %></td>
         <td><%= question.title %></td>
-        <td><%= collection_select(:question, :qtype, QuestionType.all, :questiontype, :questiontype, :selected => question.qtype, :disabled => true) %></td>
+        <td><%= collection_select(:question, :qtype, QuestionType.all, :questiontype, :questiontype, {:selected => question.qtype}, {:disabled =>  'disabled' })  %></td>
         <td><%= question.desc %></td>
         <td><%= question.answer %></td>
         <td><%= question.definition %></td>
