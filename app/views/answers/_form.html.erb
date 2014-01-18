@@ -1,4 +1,4 @@
-<%= form_for @answer, :html => { :class => 'form-horizontal' } do |f| %>
+<%= form_for [@survey, @answer], :html => { :class => 'form-horizontal' } do |f| %>
   <div class="control-group">
     <%= f.label :answer, :class => 'control-label' %>
     <div class="controls">
@@ -8,7 +8,7 @@
   <div class="control-group">
     <%= f.label :response, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :response, :class => 'text_field' %>
+      <%= f.text_field :resp, :class => 'text_field' %>
     </div>
   </div>
   <div class="control-group">
@@ -31,8 +31,7 @@
   </div>
 
   <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                answers_path, :class => 'btn' %>
+    <%= f.submit 'Submit', :class => 'btn btn-primary' %>
+    <%= link_to 'Cancel', survey_answers_path(params[:survey_id]), :class => 'btn' %> 
   </div>
 <% end %>

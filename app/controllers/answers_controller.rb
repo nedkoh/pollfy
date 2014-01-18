@@ -26,6 +26,7 @@ class AnswersController < ApplicationController
 
   # GET /answers/1/edit
   def edit
+    @survey = Survey.find(params[:survey_id])
   end
 
   # POST /answers

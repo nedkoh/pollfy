@@ -46,7 +46,7 @@
           <% @q.definition.each_with_index do |t, index| %>
             <%#= a.check_box :response, {:multiple => true}, index, nil %><%#= a.label t %>
             <label>
-            <%= a.check_box :response, {:multiple => true}, index, nil %> <%= t %>
+            <%= a.check_box :resp, {:multiple => true}, index, nil %> <%= t %>
             </label>
           </br><br/>
           <% end %>

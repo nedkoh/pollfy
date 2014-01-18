@@ -16,7 +16,7 @@
     <% @answers.each do |answer| %>
       <tr>
         <td><%= answer.answer %></td>
-        <td><%= answer.response %></td>
+        <td><%= answer.resp %></td>
         <td><%= link_to answer.question.order, survey_question_path(@survey, answer.question_id) %></td>
         <td><%=l answer.created_at, format: :short %></td>
         <td>
