@@ -18,11 +18,11 @@
 
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
-              answers_path, :class => 'btn'  %>
+              survey_answers_path(params[:survey_id]), :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_answer_path(@answer), :class => 'btn' %>
+              edit_survey_answer_path(params[:survey_id], @answer), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              answer_path(@answer),
+              survey_answer_path(params[:survey_id], @answer),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
               :class => 'btn btn-danger' %>

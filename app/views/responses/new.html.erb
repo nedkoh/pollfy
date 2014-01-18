@@ -8,16 +8,13 @@
 
 
 <dl class="dl-horizontal">
- <%= form_for @survey do |s| %>
+ <%= form_for [@survey, @response] do |s| %>
    <div class="control-group">
     <%#= s.label :title, :class => 'control-label' %>
     <div class="controls">
       <%#= s.text_field :title, :class => 'text_field' %>
     </div>
   </div>
-  <%= s.fields_for :responses, @response do |r| %>
-    <%= r.hidden_field :survey_id %>
-  <% end %>
 
 <%# @survey.questions.each.with_index do |question,index| %>
       <%= s.fields_for :answers, @answers do |a| %>
@@ -58,10 +55,9 @@
           <% dropdown_array = @q.definition.each_with_index.map { |i, v| [i, v] } %>
             <%= a.select :answer, options_for_select(dropdown_array) %>
           <% end %>
-        <%= a.hidden_field :survey_id %>
+        <%= a.hidden_field :survey_id, :value => @survey.id  %>
         <%= a.hidden_field :question_id, :value => @q.id %>
         <%= a.hidden_field :user_id, :value => @survey.user_id %>
-        <%= a.hidden_field :response_id, :value => @response.id %>
       </div>
       <p/><br/>
       <%# end %>
@@ -74,3 +70,4 @@
 <% else %>
  Not allowed
 <% end %>
+

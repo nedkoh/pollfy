@@ -5,7 +5,6 @@
 <table class="table table-striped">
   <thead>
     <tr>
-      <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:answer) %></th>
       <th><%= model_class.human_attribute_name(:response) %></th>
       <th><%= model_class.human_attribute_name(:question_id) %></th>
@@ -16,13 +15,13 @@
   <tbody>
     <% @answers.each do |answer| %>
       <tr>
-        <td><%= link_to answer.id, answer_path(answer) %></td>
         <td><%= answer.answer %></td>
         <td><%= answer.response %></td>
-        <td><%= answer.question_id %></td>
+        <td><%= link_to answer.question.order, survey_question_path(@survey, answer.question_id) %></td>
         <td><%=l answer.created_at, format: :short %></td>
         <td>
-          <%= link_to 'details', answer_path(answer), :class => 'btn btn-mini' %>
+          <%= link_to 'Response', survey_response_path(@survey, answer.response_id), :class => 'btn btn-mini' %>
+          <%= link_to 'details', survey_answer_path(@survey, answer), :class => 'btn btn-mini' %>
         </td>
       </tr>
     <% end %>
@@ -33,4 +32,4 @@
 <% else %>
 <%= link_to '< Back', survey_path(@survey), :class => 'btn btn-primary' %> 
 <% end %>
-
+<%= link_to 'Responses', survey_responses_path(params[:survey_id]), :class => 'btn btn-primary' %> 

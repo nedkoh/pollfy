@@ -1,10 +1,11 @@
 class SurveysController < ApplicationController
-  layout 'simple', :only => [:r, :thanks]
-  before_action :set_survey, only: [:show, :edit, :update, :destroy, :r]
+  #layout 'simple', :only => [:r, :thanks]
+  before_action :set_survey, only: [:show, :edit, :update, :destroy]
   #skip_before_filter :authenticate_user!, only: 'r'
-  skip_before_filter :authenticate_user!, :only => [:r,:update, :thanks]
-  load_and_authorize_resource :except => [:r, :update, :thanks]
-  skip_authorization_check :only => [:r, :update, :thanks]
+  #skip_before_filter :authenticate_user!, :only => [:r,:update, :thanks]
+  load_and_authorize_resource :survey
+  #load_and_authorize_resource :except => [:r, :update, :thanks]
+  #skip_authorization_check :only => [:r, :update, :thanks]
   
   # GET /surveys
   # GET /surveys.json
@@ -23,16 +24,25 @@ class SurveysController < ApplicationController
 
   #render survey
   # GET /surveys/1/r 
-  def r
-    @survey = Survey.find(params[:id])
-    @answers = Array.new(@survey.questions.length) { @survey.answers.build }
-  end
+  #def r
+  #  @survey = Survey.find(params[:id])
+  #  @response = @survey.responses.build
+  #  @response.ip = request.remote_ip 
+    #@response.user_id = @survey.user_id
+    #@response.save
+  #  @answers = Array.new(@survey.questions.length) { @survey.answers.build }
+  #  @response.answers = @answers
+    
+    #@response.save
+    #@answers.each do |i| 
+      #i.response_id = @response.id
+    #end
+  #end
 
   #redirect survey submission
   # GET /surveys/1/thanks
-  def thanks
-
-  end
+  #def thanks
+  #end
 
   # GET /surveys/new
   def new
@@ -65,12 +75,7 @@ class SurveysController < ApplicationController
   def update
     respond_to do |format|
       if @survey.update(survey_params)
-        if user_signed_in?
         format.html { redirect_to @survey, notice: 'Survey was successfully updated.' }
-        else
-          redirecturl = (@survey.redirect.nil? || @survey.redirect.empty?) ? thanks_survey_path : @survey.redirect 
-          format.html { redirect_to redirecturl, notice: 'Thank you. Survey was successfully submitted.'  }
-        end
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -97,6 +102,6 @@ class SurveysController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def survey_params
-      params.require(:survey).permit(:title, :created_at, :updated_at, :image, :collect, :start, :end, :redirect, :user_id, :answers_attributes => [:id, :answer, {:response => []}, :survey_id, :question_id, :user_id ])
+      params.require(:survey).permit(:title, :created_at, :updated_at, :image, :collect, :start, :end, :redirect, :user_id, :answers_attributes => [:id, :answer, {:response => []}, :survey_id, :question_id, :response_id, :user_id ], :responses_attributes => [:id, :ip, :survey_id, :user_id])
     end
 end
