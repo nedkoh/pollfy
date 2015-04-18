@@ -27,7 +27,7 @@
 
   <div class="control-group">
     <%= f.label :start_at_date, :class => 'control-label' %>
-    <div class="input-append" id="start_input">
+    <div class="input-append controls" style="display:block" id="start_input">
       <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" value="<%=@survey.start.localtime.to_formatted_s(:datepicker) unless @survey.start.nil? %>"></input>
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -48,7 +48,7 @@
 
   <div class="control-group">
     <%= f.label :end_at_date, :class => 'control-label' %>
-    <div class="input-append" id="end_input">
+    <div class="input-append controls" style="display: block" id="end_input">
       <input data-format="MM/dd/yyyy HH:mm:ss PP" type="text" value="<%=@survey.end.localtime.to_formatted_s(:datepicker) unless @survey.end.nil? %>"></input>
       <span class="add-on">
         <i data-time-icon="icon-time" data-date-icon="icon-calendar">
@@ -107,7 +107,7 @@
   <div class="control-group">
     <%= f.label :user_id, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :user_id, :class => 'text_field' %>
+      <%= f.text_field :user_id, :value => @current_user.id , :class => 'text_field' %>
     </div>
   </div>
   <% end %>

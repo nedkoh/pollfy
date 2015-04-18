@@ -61,6 +61,7 @@ class ResponsesController < ApplicationController
           format.json { render action: 'show', status: :created, location: @response }
         end
       else
+        Rails.logger.info(@response.errors.full_messages.join(', '))
         format.html { render action: 'new' }
         format.json { render json: @response.errors, status: :unprocessable_entity }
       end
@@ -99,6 +100,17 @@ class ResponsesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def response_params
-      params.require(:response).permit(:ip, :survey_id, :answers_attributes => [:id, :answer, {:response => []}, :survey_id, :question_id, :response_id, :user_id ])
+      params.require(:response).permit(
+        :ip, 
+        :survey_id, 
+        :answers_attributes => [
+          :id, 
+          :answer, 
+          {:resp => []}, 
+          :survey_id, 
+          :question_id, 
+          :response_id, 
+          :user_id 
+          ])
     end
 end

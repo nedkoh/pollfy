@@ -32,5 +32,27 @@
     <% end %>
   </tbody>
 </table>
+  <script>
+  $(function() {
+    $( "#accordion" ).accordion({
+      collapsible: true
+    });
+  });
+  </script>
+</head>
+<body>
+ 
+<div id="accordion">
+  <% @responses.each_with_index do |response, i| %>
+  <h3>#<%=i+1 %>. <span>IP: <%= response.ip %> Submitted: <%=l response.created_at %></span></h3>
+  <div>
+    <%= link_to 'Response', survey_response_path(params[:survey_id], response), :class => 'btn btn-mini' %>
+    <p>
+      <%= render :partial => 'answers', :locals => { :answers => response.answers }  %></p>
+      <%#= render :partial => 'answers', :collection => response.answers %>
+      <%#= render :partial => 'answers', :answers => response %></p>
+  </div>
+  <% end %>
+</div>
 <%= link_to '< Back', survey_path(@survey), :class => 'btn btn-primary' %> 
 <%= link_to 'Answers', survey_answers_path(params[:survey_id]), :class => 'btn btn-primary' %> 

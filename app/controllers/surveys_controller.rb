@@ -22,28 +22,6 @@ class SurveysController < ApplicationController
   def show
   end
 
-  #render survey
-  # GET /surveys/1/r 
-  #def r
-  #  @survey = Survey.find(params[:id])
-  #  @response = @survey.responses.build
-  #  @response.ip = request.remote_ip 
-    #@response.user_id = @survey.user_id
-    #@response.save
-  #  @answers = Array.new(@survey.questions.length) { @survey.answers.build }
-  #  @response.answers = @answers
-    
-    #@response.save
-    #@answers.each do |i| 
-      #i.response_id = @response.id
-    #end
-  #end
-
-  #redirect survey submission
-  # GET /surveys/1/thanks
-  #def thanks
-  #end
-
   # GET /surveys/new
   def new
     @survey = Survey.new
@@ -57,8 +35,10 @@ class SurveysController < ApplicationController
   # POST /surveys.json
   def create
     @survey = Survey.new(survey_params)
-    @survey.user_id = current_user.id
-
+    if (!@survey.user_id) then 
+      @survey.user_id = current_user.id 
+    end
+    
     respond_to do |format|
       if @survey.save
         format.html { redirect_to @survey, notice: 'Survey was successfully created.' }

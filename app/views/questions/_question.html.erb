@@ -1,8 +1,8 @@
 <p>
     <strong><%= question.order %>. Type:</strong>
-    <%= collection_select(:question, :qtype, QuestionType.all, :questiontype, :questiontype, :selected => question.qtype) %>
+    <%= collection_select(:question, :qtype, QuestionType.all, :questiontype, :questiontype, {:selected => question.qtype}, {:disabled =>  'disabled' })  %>
   </p>
- 
+
   <p>
     <strong>Title:</strong>
     <%= question.title %></br>

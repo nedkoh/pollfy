@@ -13,11 +13,5 @@
 <div class="form-actions">
   <%= link_to t('.back', :default => t("helpers.links.back")),
               survey_responses_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_survey_response_path(params[:survey_id], @response), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              survey_response_path(params[:survey_id], @response),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
+  <%= link_to 'Answers', survey_response_answers_path(params[:survey_id], @response), :class => 'btn btn-primary' %> 
 </div>

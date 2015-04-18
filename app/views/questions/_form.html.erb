@@ -6,7 +6,7 @@
     </div>
   </div>
   <div class="control-group">
-    <%= f.label :qtype, :class => 'control-label' %>
+    <%= f.label :type, :class => 'control-label' %>
     <div class="controls">
       <%= f.collection_select(:qtype, QuestionType.all, :questiontype, :questiontype) %>
     </div>

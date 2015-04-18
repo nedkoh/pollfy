@@ -4,13 +4,19 @@ class AnswersController < ApplicationController
   # GET /answers
   # GET /answers.json
   def index
+      #show answers for particular survey
       @survey = Survey.find(params[:survey_id])
       @answers = @survey.answers.order("question_id, created_at")
-      #if sorting answers by question show only relevant ones
       
+      #show answers for specific question
       if (params[:question_id])
         @question = Question.find(params[:question_id])
         @answers = @question.answers.order("question_id, created_at")
+      end
+      #show answers for specific response
+      if (params[:response_id])
+        @response = Response.find(params[:response_id])
+        @answers = @response.answers.order("question_id")
       end
   end
 

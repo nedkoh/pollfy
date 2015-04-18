@@ -9,6 +9,6 @@ class Survey < ActiveRecord::Base
 	accepts_nested_attributes_for :responses
 	accepts_nested_attributes_for :answers
 	belongs_to :user
-	validates :title, presence: true
+	validates :title, :user_id, presence: true
 	mount_uploader :image, ImageUploader
 end

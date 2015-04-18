@@ -16,6 +16,7 @@ Pollfy::Application.routes.draw do
       member do
         get 'thanks'
       end
+      resources :answers
     end
   end
 

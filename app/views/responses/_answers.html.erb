@@ -1,0 +1,25 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Answer</th>
+      <th><%= Answer.human_attribute_name(:response) %></th>
+      <th><%= Answer.human_attribute_name(:question_id) %></th>
+      <th><%= Answer.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% answers.each do |answer| %>
+      <tr>
+        <td><%= answer.answer %></td>
+        <td><%= answer.resp %></td>
+        <td><%= link_to answer.question.order, survey_question_path(@survey, answer.question_id) %></td>
+        <td><%=l answer.created_at, format: :short %></td>
+        <td>
+          <%= link_to 'Response', survey_response_path(@survey, answer.response_id), :class => 'btn btn-mini' %>
+          <%= link_to 'details', survey_answer_path(@survey, answer), :class => 'btn btn-mini' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
