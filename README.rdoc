@@ -5,11 +5,23 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+* Ruby version 2.0.0-p247
 
 * System dependencies
+Rails 4.0.0
 
-* Configuration
+* Configuration:
+install homebrew: ruby -e "$(curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+
+brew doctor - shows status
+brew update - updates to latest version
+brew install rbenv - install rbenv
+
+brew install ruby-build
+ruby-build --definitions
+rbenv install 2.0.0-p247
+rbevn version
+rbenv versions
 
 * Database creation
 
@@ -20,6 +32,18 @@ Things you may want to cover:
 * Services (job queues, cache servers, search engines, etc.)
 
 * Deployment instructions
+local:
+rails server
+remote:
+git remote -v -shows all remotes
+heroku create
+git push heroku master
+heroku logs
+heroku run rake db:migrate
+
+heroku open > open in browser
+heroku ps:scale web=1 >scale dynos to 1
+heroku run rails console >get to the console
 
 * ...
 
